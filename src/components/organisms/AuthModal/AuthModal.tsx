@@ -1,13 +1,12 @@
 import React from "react";
 import { Modal, Box, Paper, Typography } from "@mui/material";
 import { GoogleAuth } from "@molecules/GoogleAuth";
-import { useAuthStore } from "@store/useAuthStore";
+import { IAuthModalProps } from "./AuthModal.props";
 
-export const AuthModal: React.FC = () => {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+export const AuthModal: React.FC<IAuthModalProps> = ({isOpen}) => {
 
   return (
-    <Modal open={!isAuthenticated} aria-labelledby="auth-modal-title" aria-describedby="auth-modal-description">
+    <Modal open={isOpen} aria-labelledby="auth-modal-title" aria-describedby="auth-modal-description">
       <Box
         sx={{
           display: "flex",

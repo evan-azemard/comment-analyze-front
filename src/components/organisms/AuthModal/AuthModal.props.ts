@@ -1,5 +1,3 @@
-declare global {
-  interface Window {
-    google: any;
-  }
+export interface IAuthModalProps {
+  isOpen: boolean;
 }

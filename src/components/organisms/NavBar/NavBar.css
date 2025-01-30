@@ -1,14 +1,11 @@
-.nav-flex{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: azure;
-    padding: 25px;
-
+.nav-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .nav-flex > div {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 25vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 25vw;
 }
