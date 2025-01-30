@@ -1,5 +1,4 @@
-import { VideoList } from "@molecules/VideoList";
-import { Typography } from "@mui/material";
+import { VideoSection } from "@organisms/VideoSection";
 import { useAuthStore } from "@store/useAuthStore"
 
 export const HomePage: React.FC = () => {
@@ -7,8 +6,7 @@ export const HomePage: React.FC = () => {
 
     return (
         <div>
-            <Typography variant="h3" component="h2">Bienvenue !</Typography>
-            {isAuthenticated && <VideoList />}
+            {isAuthenticated && <VideoSection />}
         </div>
     )
 }
