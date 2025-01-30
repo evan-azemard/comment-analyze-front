@@ -12,19 +12,19 @@ export const VideoList: React.FC = () => {
     if (!videos || videos.length === 0) return <p>Aucune vidéo trouvée.</p>;
 
 
-    return (
-        <ul>
-            {videos.map((video: any) => (
-                <li key={video.id.videoId}>
-                    <img
-                        src={video.snippet.thumbnails.default.url}
-                        alt={video.snippet.title}
-                        width="120"
-                    />
-                    <p>{video.snippet.title}</p>
-                </li>
-            ))}
-        </ul>
-    );
+return (
+    <div>
+        {videos.filter((video) => video.snippet)
+        .map((video) => (
+            <div key={video.id.videoId}>
+                <img
+                    src={video.snippet.thumbnails?.medium?.url || "default-thumbnail.jpg"}
+                    alt={video.snippet.title}
+                />
+                <p>{video.snippet.title}</p>
+            </div>
+        ))}
+    </div>
+);
 
 }

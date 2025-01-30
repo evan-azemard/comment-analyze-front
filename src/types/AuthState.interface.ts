@@ -5,3 +5,4 @@ export interface IAuthState {
     photo: string | null;
     login: (token: string, name: string, photo: string) => void;
     logout: () => void;
+}
