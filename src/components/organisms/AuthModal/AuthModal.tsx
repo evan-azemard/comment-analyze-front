@@ -1,9 +1,11 @@
 import React from "react";
 import { Modal, Box, Paper, Typography } from "@mui/material";
-import { IAuthModalProps } from "./AuthModal.props";
 import { GoogleAuth } from "@molecules/GoogleAuth";
+import { useAuthStore } from "@store/useAuthStore";
 
-export const AuthModal: React.FC<IAuthModalProps> = ({ isAuthenticated, setIsAuthenticated }) => {
+export const AuthModal: React.FC = () => {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   return (
     <Modal open={!isAuthenticated} aria-labelledby="auth-modal-title" aria-describedby="auth-modal-description">
       <Box
@@ -25,12 +27,12 @@ export const AuthModal: React.FC<IAuthModalProps> = ({ isAuthenticated, setIsAut
           }}
         >
           <Typography variant="h5" id="auth-modal-title" fontWeight="bold" gutterBottom>
-            Bienvenue 👋
+           "Bienvenue 👋"
           </Typography>
           <Typography variant="body1" id="auth-modal-description" marginBottom={3}>
             Veuillez vous connecter avec votre compte Google pour commencer à utiliser l'application.
           </Typography>
-          <GoogleAuth setIsAuthenticated={setIsAuthenticated} />
+          <GoogleAuth />
         </Paper>
       </Box>
     </Modal>

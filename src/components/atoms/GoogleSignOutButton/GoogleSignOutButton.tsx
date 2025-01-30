@@ -1,8 +1,7 @@
 import { Button } from "@mui/material";
-import { IGoogleSignOutButton } from "./GoogleSignOutButton.props";
+import { IGoogleSignOutButtonProps } from "./GoogleSignOutButton.props";
 
-export const GoogleSignOutButton: React.FC<IGoogleSignOutButton> = ({ onSignOut }) => {
-    return (
-        <Button onClick={onSignOut} variant="contained">Déconnexion</Button>
-    )
+export const GoogleSignOutButton: React.FC<IGoogleSignOutButtonProps> = ({ onClick }) => {
+
+    return <Button onClick={onClick} variant="contained">Déconnexion</Button>;
 }

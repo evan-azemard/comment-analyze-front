@@ -1,17 +1,13 @@
 import { AuthModal } from "@organisms/AuthModal";
 import { Header } from "@organisms/Header";
-import { useState } from "react";
+import { useAuthStore } from "@store/useAuthStore";
 
 export const AuthPage: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   return (
     <div>
-      {isAuthenticated ? (
-        <Header setIsAuthenticated={setIsAuthenticated} />
-      ) : (
-        <AuthModal isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-      )}
+      {isAuthenticated ? <Header /> : <AuthModal />}
     </div>
   );
 };

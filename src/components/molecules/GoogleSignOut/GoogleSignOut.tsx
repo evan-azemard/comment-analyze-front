@@ -1,13 +1,15 @@
 import { GoogleSignOutButton } from "@atoms/GoogleSignOutButton";
-import { IGoogleSignOut } from "./GoogleSignOut.props";
+import { useAuthStore } from "@store/useAuthStore";
 
-export const GoogleSignOut: React.FC<IGoogleSignOut> = ({ setIsAuthenticated }) => {
+export const GoogleSignOut: React.FC = () => {
+  const logount = useAuthStore((state) => state.logout);
+
   const handleSignOut = () => {
     if (window.google) {
       window.google.accounts.id.disableAutoSelect();
     }
-    setIsAuthenticated(false);
+    logount();
   };
 
-  return <GoogleSignOutButton onSignOut={handleSignOut} />;
+  return <GoogleSignOutButton onClick={handleSignOut} />;
 };

@@ -3,8 +3,3 @@ declare global {
     google: any;
   }
 }
-
-export interface IAuthModalProps {
-  setIsAuthenticated: (isAuth: boolean) => void;
-  isAuthenticated: boolean;
-}
