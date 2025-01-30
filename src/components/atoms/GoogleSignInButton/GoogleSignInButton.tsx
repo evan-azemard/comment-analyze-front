@@ -1,4 +1,6 @@
-export const GoogleSignInButton: React.FC = () => {
+import { IGoogleSingnInButtonProps } from "./GoogleSignInButton.props";
 
-    return <div id="google-login-button"></div>;
+export const GoogleSignInButton: React.FC<IGoogleSingnInButtonProps> = ( {onClick}) => {
+
+    return <div id="google-login-button" onClick={onClick}></div>;
 };

@@ -1,0 +1,16 @@
+.google-button{
+    cursor: pointer;
+    width: 100%;
+    height: 5vh;
+    padding: 10px;
+    background-color: rgb(26,115,232);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    transition: .5s ease;
+}
+
+.google-button:hover{
+    background-color: rgba(26, 115, 232, 0.623);
+
+}
