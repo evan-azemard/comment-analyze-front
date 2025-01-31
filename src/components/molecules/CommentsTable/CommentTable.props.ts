@@ -7,6 +7,7 @@ export interface IComment {
         authorDisplayName: string;
         authorProfileImageUrl: string;
         textDisplay: string;
+        videoId?: string;
       };
     };
   };
@@ -14,4 +15,5 @@ export interface IComment {
 
 export interface ICommentsTableProps {
   comments: IComment[];
+  videoId?: string;
 }

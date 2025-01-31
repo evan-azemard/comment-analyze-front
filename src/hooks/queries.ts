@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchYoutubeVideoDetailsAndComments, fetchYoutubeVideos } from "@api/fetchYoutubeVideosApi";
+import { fetchYoutubeComments, fetchYoutubeVideoDetails, fetchYoutubeVideos } from "@api/fetchYoutubeVideosApi";
 import { fetchUserInfo } from "@api/fetchUserInfoApi";
 
 export function useFetchYoutubeVideos(token: string) {
     return useQuery({
-        queryKey: ["youtubeVideos", token],
+        queryKey: ["getYoutubeVideos", token],
         queryFn: () => fetchYoutubeVideos(token),
         enabled: !!token,
     });
 }
 export function useFetchUserInfo(token: string) {
     return useQuery({
-        queryKey: ["userInfos", token],
+        queryKey: ["getUserInfos", token],
         queryFn: () => fetchUserInfo(token),
         enabled: !!token,
     })
@@ -19,8 +19,18 @@ export function useFetchUserInfo(token: string) {
 
 export function useFetchYoutubeVideoById(videoId: string) {
     return useQuery({
-        queryKey: ["youtubeVideoById", videoId],
-        queryFn: () => fetchYoutubeVideoDetailsAndComments(videoId),
+        queryKey: ["getYoutubeVideoById", videoId],
+        queryFn: () => fetchYoutubeVideoDetails(videoId),
         enabled: !!videoId,
     })
 }
+
+export function useFetchYoutubeCommentVideo(videoId: string) {
+    return useQuery({
+        queryKey: ["getYoutubeCommentVideo", videoId],
+        queryFn: () => fetchYoutubeComments(videoId),
+        enabled: !!videoId,
+        staleTime: 0,
+    })
+}
+

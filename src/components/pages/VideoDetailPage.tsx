@@ -1,21 +1,43 @@
 import { useParams } from "react-router-dom";
-import { useFetchYoutubeVideoById } from "@hooks/queries";
-import { Container, Typography, Card, CardMedia, CardContent } from "@mui/material";
+import { useFetchYoutubeCommentVideo, useFetchYoutubeVideoById } from "@hooks/queries";
+import { Button, Container, Typography } from "@mui/material";
 import { VideoDetails } from "@molecules/VideoDetails";
-import { CommentsTable } from "@molecules/CommentsTable";
+import { CommentSection } from "@organisms/CommentSection";
 
 export const VideoDetailPage: React.FC = () => {
     const { id } = useParams();
 
-    const { data: video, isLoading, isError } = useFetchYoutubeVideoById(id ?? "");
+    const {
+        data: comments,
+        isLoading: isLoadingComments,
+        isError: isErrorComments,
+        refetch: refetchComment,
+    } = useFetchYoutubeCommentVideo(id ?? "");
 
-    if (isLoading) return <p>Chargement des détails...</p>;
-    if (isError || !video) return <p>Erreur ou vidéo introuvable.</p>;
+    const {
+        data: videoDetails,
+        isLoading: isLoadingVideoDetails,
+        isError: isErrorVideoDetails,
+        refetch: refetchVideoDetails,
+    } = useFetchYoutubeVideoById(id ?? "");
 
-    const { videoDetails, comments } = video;
+    if (isLoadingVideoDetails || isLoadingComments) {
+        return <div>Chargement...</div>;
+    }
+
+    if (isErrorVideoDetails || isErrorComments || !videoDetails) {
+        return <div>Une erreur est survenue</div>;
+    }
+
+    const handleRefetch = () => {
+        refetchComment();
+        refetchVideoDetails();
+    };
 
     return (
+
         <Container sx={{ mt: 4 }}>
+            <Button onClick={handleRefetch}>Rafraîchir</Button>
             <Typography variant="h4" gutterBottom>
                 Détails de la vidéo
             </Typography>
@@ -25,8 +47,7 @@ export const VideoDetailPage: React.FC = () => {
                 description={videoDetails.snippet.description}
                 videoId={id!}
             />
-
-            <CommentsTable comments={comments} />
+            <CommentSection comments={comments} videoId={id} />
         </Container>
     );
 };

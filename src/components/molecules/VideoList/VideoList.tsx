@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const VideoList: React.FC = () => {
     const navigate = useNavigate();
     const { token } = useAuthStore();
-    const { data: videos, isLoading, isError } = useFetchYoutubeVideos(token ?? "");
+    const { data: videos, isLoading, isError, refetch } = useFetchYoutubeVideos(token ?? "");
 
     if (isLoading) return <p>Chargement des vidéos...</p>;
     if (isError) return <p>Erreur lors de la récupération des vidéos.</p>;
@@ -14,28 +14,30 @@ export const VideoList: React.FC = () => {
 
     return (
         <>
-            {
-                videos.filter((video) => video.snippet).map((video) =>
-                (
-                    <Card key={video.id.videoId} sx={{ width: 345, height: 320 }}>
-                        <CardMedia
-                            sx={{ height: 200, objectFit: "cover" }}
-                            image={video.snippet.thumbnails?.medium?.url}
-                            title={video.snippet.title}
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                {video.snippet.title}
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button size="small" onClick={() => navigate(`/video/${video.id.videoId}`)}>
-                                Voir les commentaires</Button>
-                        </CardActions>
-                    </Card>
-                )
-                )
-            }
+            <section>
+                {
+                    videos.filter((video) => video.snippet).map((video) =>
+                    (
+                        <Card key={video.id.videoId} sx={{ width: 345, height: 320, overflow: "scroll" }}>
+                            <CardMedia
+                                sx={{ height: 200, objectFit: "cover" }}
+                                image={video.snippet.thumbnails?.medium?.url}
+                                title={video.snippet.title}
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    {video.snippet.title}
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small" onClick={() => navigate(`/video/${video.id.videoId}`)}>
+                                    Voir les commentaires</Button>
+                            </CardActions>
+                        </Card>
+                    )
+                    )
+                }
+            </section>
         </>
     )
 }

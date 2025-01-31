@@ -4,7 +4,6 @@ import { ICommentsTableProps, IComment } from "./CommentTable.props";
 import { CommentRow } from "@molecules/CommentRow";
 
 export const CommentsTable: React.FC<ICommentsTableProps> = ({ comments }) => {
-    console.log(comments);
     return (
         <TableContainer component={Paper} sx={{ mt: 4 }}>
             <Table>

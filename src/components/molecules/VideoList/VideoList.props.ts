@@ -1,3 +1,3 @@
-export interface IVideoList {
-    token: string;
+export interface IVideoListProps {
+    onRefetch: () => void;
 }
