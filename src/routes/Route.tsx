@@ -8,7 +8,7 @@ import { ProtectedRoute } from './ProtectedRoute'; // Assure-toi que le chemin e
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={
+      <Route path="/comment-analyze-front/" element={
         <ProtectedRoute>
           <HomePage />
         </ProtectedRoute>
