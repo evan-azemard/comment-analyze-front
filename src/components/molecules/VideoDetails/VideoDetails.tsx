@@ -1,5 +1,4 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { useAuthStore } from "@store/useAuthStore";
 import { IVideoDetailsProps } from "./VideoDetails.props";
 
 export const VideoDetails: React.FC<IVideoDetailsProps> = ({ title, description, videoId }) => {

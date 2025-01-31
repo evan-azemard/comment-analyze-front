@@ -3,6 +3,6 @@ export interface IAuthState {
     token: string | null;
     name: string | null;
     photo: string | null;
-    login: (token: string, name: string, photo: string) => void;
+    login: (token: string | null, name: string, photo: string) => void;
     logout: () => void;
 }

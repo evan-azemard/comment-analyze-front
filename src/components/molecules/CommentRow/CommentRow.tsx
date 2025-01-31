@@ -20,12 +20,21 @@ export const CommentRow: React.FC<ICommentRowProps> = ({ comment }) => {
             editComment({
                 commentId: comment.snippet.topLevelComment.id,
                 newText: newCommentText,
-                videoId: comment.snippet.videoId,
                 token: token,
             });
             setIsEditing(false);
         }
     }
+
+    const handleDeleteComment = () => {
+        if (token) {
+            deleteComment({
+                commentId: comment.snippet.topLevelComment.id,
+                token, 
+            });
+        }
+    }
+
     return (
         <TableRow>
             <TableCell>
@@ -54,13 +63,7 @@ export const CommentRow: React.FC<ICommentRowProps> = ({ comment }) => {
                 <Button
                     sx={{ margin: 1 }} variant="contained"
                     color="error"
-                    onClick={() =>
-                        deleteComment({
-                            commentId: comment.snippet.topLevelComment.id,
-                            videoId: comment.snippet.videoId,
-                            token,
-                        })
-                    }
+                    onClick={handleDeleteComment}
                 >Supprimer</Button>
             </TableCell>
         </TableRow>

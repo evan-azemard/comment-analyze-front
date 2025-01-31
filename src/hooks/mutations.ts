@@ -6,9 +6,8 @@ export function useAddComment() {
     return useMutation({
         mutationFn: ({ videoId, commentText, token }: { videoId: string; commentText: string; token: string }) =>
             addComment(videoId, commentText, token),
-        onSuccess: (_, { videoId }) => {
-            console.log("Invalidating query for videoId:", videoId);
-            queryClient.invalidateQueries({ queryKey: ["getYoutubeCommentVideo", videoId] });
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["getYoutubeCommentVideo"] });
         },
     }); 
 }
@@ -16,10 +15,10 @@ export function useAddComment() {
 export function useEditComment() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: ({ commentId, newText, videoId, token }: { commentId: string; newText: string; videoId:string, token: string }) =>
+        mutationFn: ({ commentId, newText, token }: { commentId: string; newText: string;  token: string }) =>
             editComment(commentId, newText, token),
-        onSuccess: (_, { videoId }) => {
-            queryClient.invalidateQueries({ queryKey: ["getYoutubeCommentVideo", videoId] });
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["getYoutubeCommentVideo"] });
         },
     });
 }
@@ -27,10 +26,10 @@ export function useEditComment() {
 export function useDeleteComment() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: ({ commentId, videoId, token }: { commentId: string; videoId: string, token: string }) =>
+        mutationFn: ({ commentId, token }: { commentId: string;  token: string }) =>
             deleteComment(commentId, token),
-        onSuccess: (_, { videoId }) => {
-            queryClient.invalidateQueries({ queryKey: ["getYoutubeCommentVideo", videoId] });
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["getYoutubeCommentVideo"] });
         },
     });
 }
@@ -38,10 +37,10 @@ export function useDeleteComment() {
 export function useReplyToComment() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: ({ parentId, replyText, videoId, token }: { parentId: string; replyText: string, videoId: string, token: string }) =>
+        mutationFn: ({ parentId, replyText, token }: { parentId: string; replyText: string, token: string }) =>
             replyToComment(parentId, replyText, token),
-        onSuccess: (_, { videoId }) => {
-            queryClient.invalidateQueries({ queryKey: ["getYoutubeCommentVideo", videoId] });
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["getYoutubeCommentVideo"] });
         },
     });
 }

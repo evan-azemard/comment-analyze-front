@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const VideoList: React.FC = () => {
     const navigate = useNavigate();
     const { token } = useAuthStore();
-    const { data: videos, isLoading, isError, refetch } = useFetchYoutubeVideos(token ?? "");
+    const { data: videos, isLoading, isError } = useFetchYoutubeVideos(token ?? "");
 
     if (isLoading) return (
         Array.from(new Array(5)).map((_, index) => (
