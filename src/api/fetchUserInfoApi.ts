@@ -9,6 +9,5 @@ export const fetchUserInfo = async (token: string): Promise<IUserInfo> => {
         }
     })
 
-    console.log("fetchUserInfo => ", response.data);
     return response.data;
 }

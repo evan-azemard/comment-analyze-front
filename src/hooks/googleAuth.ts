@@ -25,7 +25,7 @@ export const useGoogleAuth = () => {
         if (window.google) {
           const auth = window.google.accounts.oauth2.initTokenClient({
             client_id: CLIENT_ID,
-            scope: "https://www.googleapis.com/auth/youtube.readonly",
+            scope: "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube.readonly",
             callback: handleCredentialResponse,
           });
   
