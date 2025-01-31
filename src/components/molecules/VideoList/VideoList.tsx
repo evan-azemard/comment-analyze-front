@@ -1,5 +1,5 @@
 import { useFetchYoutubeVideos } from "@hooks/queries";
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Skeleton, Typography } from "@mui/material";
 import { useAuthStore } from "@store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,14 @@ export const VideoList: React.FC = () => {
     const { token } = useAuthStore();
     const { data: videos, isLoading, isError, refetch } = useFetchYoutubeVideos(token ?? "");
 
-    if (isLoading) return <p>Chargement des vidéos...</p>;
+    if (isLoading) return (
+        Array.from(new Array(5)).map((_, index) => (
+            <Box key={index} component="li" sx={{ mb: 2 }}>
+              <Skeleton variant="text" width={500} height={50} animation="wave" />
+              <Skeleton variant="rectangular" animation="wave" width={300} height={50} />
+            </Box>
+          ))
+    )
     if (isError) return <p>Erreur lors de la récupération des vidéos.</p>;
     if (!videos || videos.length === 0) return <p>Aucune vidéo trouvée.</p>;
 
